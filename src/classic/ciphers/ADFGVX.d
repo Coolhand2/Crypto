@@ -1,6 +1,5 @@
 module classic.ciphers.ADFGVX;
 
-import std.stdio;
 import std.string;
 
 class ADFGVX {
@@ -8,6 +7,7 @@ class ADFGVX {
     private char[] _letters = ['A','D','F','G','V','X'];
 
     public this( ) {
+        //TODO: Randomize the cration of this alphabet.
         string alphabet = "MBJYA,Z(?PS.)NX; DURITW:!HGLFECVO'KQ";
 
         _polybius = new char[][6];
@@ -27,6 +27,7 @@ class ADFGVX {
         char[][char] map;
         string cipher;
 
+        //Get the coordinates of each letter in the message.
         foreach( char c ; plain.toUpper() ) {
             for( int y = 0; y < 6; y++ ) {
                 for( int x = 0; x < 6; x++ ) {
@@ -37,12 +38,20 @@ class ADFGVX {
                 }
             }
         }
+
+        //Map these coordinates under the key letters, going across.
         foreach( int i, char c; coordinates ) {
             map[key[i%key.length]] ~= c;
         }
+
+        //Transpose the collection of letters under each key letter into a single
+        // line, after sorting the resulting map into alphabetical according to
+        // the key characters.
         foreach( char c; map.keys.sort ) {
             cipher ~= map[c] ~ " ";
         }
+
+        //Return the cipher text, stripping whitespace at each end of the message.
         return cipher.strip();
     }
 
@@ -52,22 +61,30 @@ class ADFGVX {
         string[] plainMap;
         char[] coordinates;
 
+        //Get a "plain" mapping of the message, by splitting the cipher into an array.
         plainMap = cipher.split(" ");
+
+        //Initialize the map that we'll be using to translate back into the plaintext.
         foreach( char c; key ) {
             map[c] = [];
         }
 
+        //De-sort the collection into the actual map we'll be reconstructing the
+        // coordinate string from.
         foreach( int i, string word; plainMap ) {
             foreach( char letter; word ) {
                 map[map.keys.sort[i]] ~= letter;
             }
         }
+        //Go through the map, and actual reconstruct the coordinate list.
         for( int i = 0; i < cipher.length; i++ ) {
             if( map[key[i % map.length]].length > 0 ) {
                 coordinates ~= map[key[i % map.length]][0];
                 map[key[i % map.length]] = map[key[i % map.length]][1 .. $];
             }
         }
+        //Go through the coordinate list two at a time, grabbing the letters
+        // at the X and Y coordinates.
         for( int i = 0; i < coordinates.length; i += 2 ) {
             int x, y;
             char cx = coordinates[i];
@@ -86,6 +103,7 @@ class ADFGVX {
         return plain;
     }
 
+    //Test that a known plain text translates into a known cipher text.
     unittest {
         ADFGVX cipher = new ADFGVX( );
         string text = "HELLO, WORLD.";
@@ -95,6 +113,7 @@ class ADFGVX {
         assert( test == "VFFDF XVVXX DVXGGD GXVGX VGAFV" );
     }
 
+    //Test that a known cipher text translates into a known plain text.
     unittest {
         ADFGVX cipher = new ADFGVX( );
         string text = "VFFDF XVVXX DVXGGD GXVGX VGAFV";
