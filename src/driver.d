@@ -1,20 +1,26 @@
 module driver;
 
-import classic.ciphers.ADFGVX;
-import std.stdio;
+import
+    classic.ciphers.ADFGVX,
+
+    classic.codes.rot13,
+
+    std.algorithm,
+    std.stdio;
 
 void main( )
 {
-    ADFGVX c = new ADFGVX( );
-    string plain = "Hello, World.";
-    string key = "fubar";
+    Rot13 rot = new Rot13( );
+    ADFGVX adfgvx = new ADFGVX();
 
-    string a = c.encode( plain, key );
-    string b = c.decode( a, key );
-
-    writefln( "Plaintext: %s", plain );
-    writefln( "Key: %s", key );
-    writefln( "Ciphertext: %s", a );
-    writefln( "Decode Result: %s", b );
-
+    //writeln(adfgvx.encode("WHAT THE HELL IS THIS CRAP? THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG. NOT THE OTHER WAY AROUND!", "THISISFUBAREDSHITSIR"));
+    //writeln(adfgvx.decode("FGAGVFVFVX VFVFVVGDDF DVFVFDAGDD GDDXXXAXVG GVDAVXVVGD GXVGDVVVXVAXGGXVVVAX DVVDGGGFVAFDVXFDVDFAGXVVDXAXFXFDVFFVVVF GVVGGVAGFGFFVFFVXAA VAVFVVFVFXDGFXXAGFFADVXGVVDFVDGGFXGGFAFV VVXDVGXDFFADGVFGXVGA GFGGFFFFGG","THISISFUBAREDSHITSIR"));
+    string key = "THISISFUBAREDSHITSIR";
+    char [] cKey;
+    foreach( char c ; key ){
+        cKey ~= c;
+    }
+    writeln(cKey);
+    auto aKey = uniq(cKey);
+    writeln(aKey);
 }
