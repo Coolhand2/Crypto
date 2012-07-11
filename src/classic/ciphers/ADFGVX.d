@@ -1,6 +1,7 @@
 module classic.ciphers.ADFGVX;
 
 import std.string;
+import std.array;
 
 class ADFGVX {
     private char[][] _polybius;
@@ -26,6 +27,7 @@ class ADFGVX {
         char[] coordinates;
         char[][char] map;
         string cipher;
+        key = _unique(key);
 
         //Get the coordinates of each letter in the message.
         foreach( char c ; plain.toUpper() ) {
@@ -60,6 +62,7 @@ class ADFGVX {
         char[][char] map;
         string[] plainMap;
         char[] coordinates;
+        key = _unique(key);
 
         //Get a "plain" mapping of the message, by splitting the cipher into an array.
         plainMap = cipher.split(" ");
@@ -85,10 +88,10 @@ class ADFGVX {
         }
         //Go through the coordinate list two at a time, grabbing the letters
         // at the X and Y coordinates.
-        for( int i = 0; i < coordinates.length; i += 2 ) {
+        for( int i = 0; i < coordinates.length - 1; i += 2 ) {
             int x, y;
             char cx = coordinates[i];
-            char cy = coordinates[i+i];
+            char cy = coordinates[i+1];
             for( int k = 0; k < 6; k++ ) {
                 if( cx == _letters[k] ) {
                     x = k;
@@ -101,6 +104,21 @@ class ADFGVX {
         }
 
         return plain;
+    }
+
+    private string _unique(string str){
+        char[] matches = [];
+        foreach(char c; str){
+            bool inside = false;
+            foreach( char k ; matches ){
+                if( k == c )
+                    inside = true;
+            }
+            if(!inside){
+                matches ~= c;
+            }
+        }
+        return cast(string)matches;
     }
 
     //Test that a known plain text translates into a known cipher text.

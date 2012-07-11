@@ -12,15 +12,22 @@ void main( )
 {
     Rot13 rot = new Rot13( );
     ADFGVX adfgvx = new ADFGVX();
+    ///////////////////////////////////////////////////////////////////////////
+    writeln("ADFGVX Cipher:");
+    string message = "I am not yelling! Wait, why am I yelling?";
+    string key = "What?";
+    string cipher = adfgvx.encode(message,key);
+    writeln(cipher);
 
-    //writeln(adfgvx.encode("WHAT THE HELL IS THIS CRAP? THE QUICK BROWN FOX JUMPED OVER THE LAZY DOG. NOT THE OTHER WAY AROUND!", "THISISFUBAREDSHITSIR"));
-    //writeln(adfgvx.decode("FGAGVFVFVX VFVFVVGDDF DVFVFDAGDD GDDXXXAXVG GVDAVXVVGD GXVGDVVVXVAXGGXVVVAX DVVDGGGFVAFDVXFDVDFAGXVVDXAXFXFDVFFVVVF GVVGGVAGFGFFVFFVXAA VAVFVVFVFXDGFXXAGFFADVXGVVDFVDGGFXGGFAFV VVXDVGXDFFADGVFGXVGA GFGGFFFFGG","THISISFUBAREDSHITSIR"));
-    string key = "THISISFUBAREDSHITSIR";
-    char [] cKey;
-    foreach( char c ; key ){
-        cKey ~= c;
-    }
-    writeln(cKey);
-    auto aKey = uniq(cKey);
-    writeln(aKey);
+    message = adfgvx.decode(cipher,key);
+    writeln(message);
+    ///////////////////////////////////////////////////////////////////////////
+    writeln("\nROT13 Code:");
+    ///////////////////////////////////////////////////////////////////////////
+    message = "What in the hell?";
+    cipher = rot.encode(message);
+    writeln(cipher);
+
+    message = rot.decode(cipher);
+    writeln(message);
 }
