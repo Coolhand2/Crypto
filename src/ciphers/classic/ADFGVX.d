@@ -1,4 +1,4 @@
-module classic.ciphers.ADFGVX;
+module ciphers.classic.ADFGVX;
 
 import std.string;
 

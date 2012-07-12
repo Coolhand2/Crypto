@@ -1,4 +1,4 @@
-module classic.ciphers.caesar;
+module ciphers.classic.caesar;
 
 import std.string;
 

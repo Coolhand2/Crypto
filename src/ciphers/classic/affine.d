@@ -1,4 +1,4 @@
-module classic.ciphers.affine;
+module ciphers.classic.affine;
 
 import std.string;
 import std.random;
@@ -31,6 +31,10 @@ class Affine{
             message ~= _alphabet[position];
         }
         return message;
+    }
+
+    public int getAlphabetLength(){
+        return _alphabet.length;
     }
 
     public int getCoprime(){

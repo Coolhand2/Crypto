@@ -1,4 +1,4 @@
-module classic.ciphers.autokey;
+module ciphers.classic.autokey;
 
 import std.string;
 
