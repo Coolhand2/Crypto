@@ -57,7 +57,7 @@ class Autokey{
         Autokey a = new Autokey();
         string message = "MEETATTHEFOUNTAIN";
         string key = "KILT";
-        string test = "WMPMMXXAEYHBRYOCA";
+        string test = "WMPmMXXaEYhbRYOca";
 
         string cipher = a.encode(message, key);
         assert(test == cipher);
@@ -65,7 +65,7 @@ class Autokey{
 
     unittest{
         Autokey a = new Autokey();
-        string cipher = "WMPMMXXAEYHBRYOCA";
+        string cipher = "WMPmMXXaEYhbRYOca";
         string key = "KILT";
         string test = "MEETATTHEFOUNTAIN";
         string message = a.decode(cipher, key);

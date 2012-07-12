@@ -36,14 +36,14 @@ class Caesar{
     unittest{
         Caesar c = new Caesar();
         string message = "THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG";
-        string test = "WKHTXLFNEURZQIRAMXPSVRYHUWKHODCBGRJ";
+        string test = "WKHTXLFNEURZQIRaMXPSHGRYHUWKHODcbGRJ";
         int shift = 3; //Hey, it's what Caesar used himself!
         string cipher = c.encode(message, shift);
         assert(cipher == test);
     }
     unittest{
         Caesar c = new Caesar();
-        string cipher = "WKHTXLFNEURZQIRAMXPSVRYHUWKHODCBGRJ";
+        string cipher = "WKHTXLFNEURZQIRaMXPSHGRYHUWKHODcbGRJ";
         string test = "THEQUICKBROWNFOXJUMPEDOVERTHELAZYDOG";
         int shift = 3;
         string message = c.decode(cipher, shift);
