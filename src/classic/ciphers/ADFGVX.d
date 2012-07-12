@@ -1,7 +1,6 @@
 module classic.ciphers.ADFGVX;
 
 import std.string;
-import std.array;
 
 class ADFGVX {
     private char[][] _polybius;

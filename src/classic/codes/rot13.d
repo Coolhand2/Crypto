@@ -1,10 +1,18 @@
 module classic.codes.rot13;
 
 import std.string;
+import std.stdio;
 
 class Rot13{
-    private string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz !@#$%^&*()_+-=[]\\{}|;':\",./<>?";
-    private string _reverse =  "?></.,\":';|}{\\][=-+_)(*&^%$#@! zyxwvutsrqponmlkjihgfedcbaZYXWVUTSRQPONMLKJIHGFEDCBA";
+    private string _alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz `1234567890-=[]\\;',./~!@#$%^&*()_+{}|:\"<>?";
+    private string _reverse;
+
+    public this( ){
+        int size = _alphabet.length;
+        for(int position = 0; position != size; position++){
+            _reverse ~= _alphabet[size-position - 1];
+        }
+    }
 
     public string encode( string message ){
         string cipher = "";
