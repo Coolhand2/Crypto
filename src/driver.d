@@ -3,6 +3,7 @@ module driver;
 import
     classic.ciphers.ADFGVX,
     classic.ciphers.autokey,
+    classic.ciphers.affine,
 
     classic.codes.rot13,
 
@@ -13,7 +14,8 @@ void main( )
 {
     Rot13 rot = new Rot13( );
     ADFGVX adfgvx = new ADFGVX();
-    Autokey a = new Autokey();
+    Autokey autokey = new Autokey();
+    Affine affine = new Affine();
     ///////////////////////////////////////////////////////////////////////////
     writeln("ADFGVX Cipher:");
     string message = "I am not yelling! Wait, why am I yelling?";
@@ -37,9 +39,18 @@ void main( )
     ///////////////////////////////////////////////////////////////////////////
     message = "What and the shit, is this Herb? I mean, c'mon!";
     key = "Herp a derp, rope a dope!";
-    cipher = a.encode(message, key);
+    cipher = autokey.encode(message, key);
     writeln(cipher);
 
-    message = a.decode(cipher, key);
+    message = autokey.decode(cipher, key);
+    writeln(message);
+    ///////////////////////////////////////////////////////////////////////////
+    writeln("\nAffine Cipher:");
+    ///////////////////////////////////////////////////////////////////////////
+    message = "Stop! This is a stickup! Hands in the air!";
+    cipher = affine.encode(message, 123);
+    writeln(cipher);
+
+    message = affine.decode(cipher, 123);
     writeln(message);
 }
