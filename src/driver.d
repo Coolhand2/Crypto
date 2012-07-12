@@ -4,18 +4,16 @@ import
     classic.ciphers.ADFGVX,
     classic.ciphers.autokey,
     classic.ciphers.affine,
-
-    classic.codes.rot13,
-
+    classic.ciphers.caesar,
     std.algorithm,
     std.stdio;
 
 void main( )
 {
-    Rot13 rot = new Rot13( );
     ADFGVX adfgvx = new ADFGVX();
     Autokey autokey = new Autokey();
     Affine affine = new Affine();
+    Caesar caesar = new Caesar();
     ///////////////////////////////////////////////////////////////////////////
     writeln("ADFGVX Cipher:");
     string message = "I am not yelling! Wait, why am I yelling?";
@@ -24,15 +22,6 @@ void main( )
     writeln(cipher);
 
     message = adfgvx.decode(cipher,key);
-    writeln(message);
-    ///////////////////////////////////////////////////////////////////////////
-    writeln("\nROT13 Code:");
-    ///////////////////////////////////////////////////////////////////////////
-    message = "What in the hell?";
-    cipher = rot.encode(message);
-    writeln(cipher);
-
-    message = rot.decode(cipher);
     writeln(message);
     ///////////////////////////////////////////////////////////////////////////
     writeln("\nAutokey Cipher:");
@@ -53,4 +42,14 @@ void main( )
 
     message = affine.decode(cipher, 123);
     writeln(message);
+    ///////////////////////////////////////////////////////////////////////////
+    writeln("\nCaesar Cipher:");
+    ///////////////////////////////////////////////////////////////////////////
+    message = "The quick borwn fox, jumped over the lazy dog!";
+    cipher = caesar.encode(message, 3); //Same shift Caesar used...
+    writeln(cipher);
+
+    message = caesar.decode(cipher, 3);
+    writeln(message);
+
 }
